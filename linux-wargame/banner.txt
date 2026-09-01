@@ -1,0 +1,12 @@
+=====================================================
+   LINUX COMMAND WARGAME - Latihan SSH untuk Siswa
+=====================================================
+Mulai dari sini:
+  ssh level0@<alamat-server> -p <port>
+  password: level0
+
+Setiap level menyembunyikan password untuk level berikutnya.
+Gunakan command yang sudah kamu pelajari: ls, cat, cd, file, find, chmod.
+
+Selamat berlatih!
+=====================================================

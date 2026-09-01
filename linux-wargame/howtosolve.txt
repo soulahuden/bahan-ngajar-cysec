@@ -1,0 +1,68 @@
+=====================================================
+CARA MENYELESAIKAN TIAP LEVEL (untuk guru, jangan dibagikan ke siswa)
+=====================================================
+Password level1-3 dan FLAG akhir berbeda-beda tiap kali image di-build.
+Lihat nilai aslinya di dalam container:
+  docker exec -it linux-wargame cat /root/ANSWER_KEY.txt
+
+Di bawah ini hanya LANGKAH/COMMAND penyelesaiannya, bukan jawabannya.
+
+-----------------------------------------------------
+LEVEL 0 -> 1  (skill: nama file mengandung spasi)
+-----------------------------------------------------
+ssh level0@<host> -p <port>
+password: level0
+
+  ls -la
+  # akan terlihat file "spasi di nama file ini"
+
+  cat "spasi di nama file ini"
+  # atau pakai tab-completion: cat spa<TAB>
+
+Password untuk level1 ada di isi file tersebut.
+
+-----------------------------------------------------
+LEVEL 1 -> 2  (skill: file tersembunyi, ls -la)
+-----------------------------------------------------
+ssh level1@<host> -p <port>
+password: (dari level0)
+
+  ls -la
+  # file ".flag" tidak muncul dengan `ls` biasa karena diawali titik
+
+  cat .flag
+
+-----------------------------------------------------
+LEVEL 2 -> 3  (skill: baca file biner dengan `strings`)
+-----------------------------------------------------
+ssh level2@<host> -p <port>
+password: (dari level1)
+
+  ls -l
+  # ada file bernama "flag"
+
+  cat flag
+  # isinya data biner acak, tampil karakter aneh/tidak terbaca
+
+  strings flag
+  # akan muncul baris "PASSWORD:xxxxxxxx" yang bisa dibaca jelas
+  # di antara noise biner
+
+-----------------------------------------------------
+LEVEL 3 -> FLAG AKHIR  (skill: 200 file, cari yang beda dengan cat *)
+-----------------------------------------------------
+ssh level3@<host> -p <port>
+password: (dari level2)
+
+  cd data
+  ls
+  # ada 200 file (file_001.txt ... file_200.txt), isinya 2 kata acak
+  # semua, kecuali satu file berisi FLAG
+
+  cat *
+  # semua isi file akan tercetak berurutan di layar; scroll/cari baris
+  # yang formatnya beda sendiri (FLAG{...}) di antara baris-baris
+  # "kata kata" yang lain
+
+FLAG yang ditemukan itulah yang harus disetorkan siswa ke guru sebagai
+bukti sudah menyelesaikan semua level.

@@ -1,0 +1,10 @@
+services:
+  linux-wargame:
+    build: .
+    image: linux-wargame:latest
+    container_name: linux-wargame
+    restart: unless-stopped
+    ports:
+      - "2222:22"   # ganti angka kiri sesuai keinginan (port publik di VPS), angka kanan (22) jangan diubah
+    mem_limit: 512m
+    pids_limit: 300
