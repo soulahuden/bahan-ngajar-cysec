@@ -1,0 +1,61 @@
+=====================================================
+CARA MENYELESAIKAN TIAP SOAL (untuk guru, jangan dibagikan ke siswa)
+=====================================================
+Flag bersifat statis (sama tiap kali di-build ulang):
+  Inspector       : FLAG{inspect_the_source}
+  robots.txt      : FLAG{robots_txt_isnt_security}
+  Cookies Admin   : FLAG{cookie_trust_issue}
+
+(Juga tersalin ke /answer_key.txt di dalam masing-masing container,
+bisa dicek dengan `docker exec <nama_container> cat /answer_key.txt`.)
+
+-----------------------------------------------------
+SOAL 1: INSPECTOR
+-----------------------------------------------------
+1. Buka http://<host>:8001
+2. Klik kanan pada halaman > "View Page Source" (atau tekan Ctrl+U),
+   ATAU buka DevTools (F12) > tab Elements.
+3. Cari komentar HTML (<!-- ... -->) di bagian bawah source, isinya
+   catatan TODO tim IT termasuk baris "FLAG debug: FLAG{...}".
+
+-----------------------------------------------------
+SOAL 2: ROBOTS.TXT
+-----------------------------------------------------
+1. Buka http://<host>:8002
+2. Buka http://<host>:8002/robots.txt
+   Isinya:
+     User-agent: *
+     Disallow: /internal-notes-x7k2q/
+   Baris "Disallow" ini justru menunjukkan folder yang ingin
+   disembunyikan dari crawler mesin pencari (tapi tetap bisa diakses
+   langsung oleh manusia/browser).
+3. Buka http://<host>:8002/internal-notes-x7k2q/
+   Flag tampil langsung di halaman itu.
+
+-----------------------------------------------------
+SOAL 3: COOKIES ADMIN
+-----------------------------------------------------
+1. Buka http://<host>:8003 -> otomatis dapat cookie "role=user".
+2. Klik "Buka Halaman Flag" (/flag) -> ditolak (403), karena role
+   masih "user".
+
+Cara A - lewat DevTools browser (paling simpel):
+  a. Buka DevTools (F12) > tab Application (Chrome) / Storage (Firefox)
+     > Cookies > pilih domain situs ini.
+  b. Ubah value cookie "role" dari "user" menjadi "admin".
+  c. Refresh halaman /flag -> flag muncul.
+
+Cara B - lewat Burp Suite (intercept request):
+  a. Set proxy browser ke Burp (biasanya 127.0.0.1:8080), aktifkan
+     Intercept di tab Proxy.
+  b. Akses http://<host>:8003/flag dari browser.
+  c. Request GET /flag akan tertahan di Burp. Lihat header "Cookie:
+     role=user".
+  d. Ubah jadi "Cookie: role=admin" langsung di request yang
+     ditangkap, lalu klik "Forward".
+  e. Response yang balik ke browser akan menampilkan flag.
+
+Inti kerentanannya: server hanya percaya begitu saja pada value cookie
+yang dikirim client, tanpa verifikasi/signature di sisi server —
+sehingga siapa pun bisa mengklaim dirinya "admin" cukup dengan mengubah
+cookie sendiri.

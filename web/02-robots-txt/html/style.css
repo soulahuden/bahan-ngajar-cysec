@@ -1,0 +1,57 @@
+:root {
+  --bg: #f4f3ef;
+  --card-bg: #ffffff;
+  --text: #22252a;
+  --muted: #6b7280;
+  --accent: #2f6f6a;
+  --accent-dark: #234f4b;
+  --border: #e2e0d8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2.5rem 3rem;
+  max-width: 480px;
+  text-align: center;
+}
+
+h1 { font-size: 1.4rem; margin-bottom: .75rem; color: var(--accent); }
+p { line-height: 1.6; margin: .5rem 0; }
+.muted { color: var(--muted); font-size: .85rem; }
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .6rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: .9rem;
+}
+.btn:hover { background: var(--accent-dark); }
+
+.flag-box {
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  background: #eef2f1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  word-break: break-all;
+}

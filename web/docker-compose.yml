@@ -1,0 +1,27 @@
+services:
+  inspector:
+    build: ./01-inspector
+    image: web-ctf-inspector:latest
+    container_name: web-ctf-inspector
+    restart: unless-stopped
+    ports:
+      - "8001:80"
+    mem_limit: 128m
+
+  robots-txt:
+    build: ./02-robots-txt
+    image: web-ctf-robots-txt:latest
+    container_name: web-ctf-robots-txt
+    restart: unless-stopped
+    ports:
+      - "8002:80"
+    mem_limit: 128m
+
+  cookies-admin:
+    build: ./03-cookies-admin
+    image: web-ctf-cookies-admin:latest
+    container_name: web-ctf-cookies-admin
+    restart: unless-stopped
+    ports:
+      - "8003:5000"
+    mem_limit: 128m

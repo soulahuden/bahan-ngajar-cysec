@@ -1,0 +1,15 @@
+FROM python:3.12-alpine
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV FLAG=FLAG{cookie_trust_issue}
+
+RUN echo "Cookies-admin flag: ${FLAG}" > /answer_key.txt
+
+EXPOSE 5000
+CMD ["python", "app.py"]
