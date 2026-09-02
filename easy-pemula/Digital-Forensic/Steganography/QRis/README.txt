@@ -1,0 +1,1 @@
+temen saya kasih foto qr tapi kepotong, bantu saya dapatkan Kembali bagian yang hilang.

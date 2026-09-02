@@ -1,0 +1,12 @@
+katanya gambar ini menyimpan sesuatu???
+
+jika sudah mendapatkan kalimatnya, ganti spasi nya jadi _, dan tambahkan FLAG{} diawal.
+
+
+Contoh:
+
+SMK JAKARTA SELATAN
+
+Menjadi:
+
+FLAG{SMK_JAKARTA_SELATAN}
