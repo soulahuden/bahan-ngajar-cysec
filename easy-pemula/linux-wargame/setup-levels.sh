@@ -64,7 +64,7 @@ WORDS=(langit rumah kucing meja lampu jalan gunung sungai kopi buku
        bintang bulan matahari daun pohon batu besi kayu kaca plastik)
 
 mkdir -p /home/level3/data
-target=$(( (RANDOM % 200) + 1 ))
+target=137
 
 for n in $(seq -w 1 200); do
   w1=${WORDS[$((RANDOM % ${#WORDS[@]}))]}
